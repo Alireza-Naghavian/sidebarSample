@@ -39,7 +39,7 @@ function UserSideBar({ containerRef }: SideBarProps) {
         {/* phone & account status */}
         <div className="w-full flex flex-col items-start gap-y-1 mt-6 pr-4">
           <Typography variant="body2" fontWeight={500}>
-            موبایل: ۰۹۱۵۸۹۵۲۴۴۹
+            موبایل: 091511111111
           </Typography>
           <Typography variant="body2" fontWeight={500}>
             وضعیت:&nbsp;
