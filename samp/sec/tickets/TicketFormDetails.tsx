@@ -155,7 +155,7 @@ function TicketFormDetails() {
                   readOnly: isRecording,
                   endAdornment: (
                     <div className="ml-[-14px] flex items-center gap-x-1">
-                      <VoiceMessages key={attachVoiceKey} />
+                      <VoiceMessages  />
                       <AttachFileField key={attachFieldKey} />
                     </div>
                   ),

@@ -161,7 +161,11 @@ function VoiceManagmentProvider({ children }: ChildrenProps) {
       setIsLoading(false);
       setTimer(0);
       setUploadProgress(0);
-      setAudioURL(null);
+      setIsUploadStarted(false);
+      setAudioURL((old) => {
+        if (old) URL.revokeObjectURL(old);
+        return null;
+      });
       setFile(null);
     }
   }, [stopStream]);
@@ -187,8 +191,7 @@ function VoiceManagmentProvider({ children }: ChildrenProps) {
   }, [stopStream]);
 
   const handleUploadVoice = useCallback(async (voiceFile: File) => {
-    if(!file)return;
-    setFile(file);
+    setFile(voiceFile);
     setIsLoading(true);
     setIsUploadStarted(true);
     setUploadProgress(0);
@@ -254,13 +257,13 @@ function VoiceManagmentProvider({ children }: ChildrenProps) {
           const url = URL.createObjectURL(audiBlob);
 
           // make  a audio file to upload
-          const file = new File([audiBlob], `voice-message-${Date.now()}.ogg`, {
+          const voiceFile = new File([audiBlob], `voice-message-${Date.now()}.ogg`, {
             type: 'audio/ogg',
           });
           // handle voice file preview
           setAudioURL(url);
           // upload async process
-          setFile(file);
+          setFile(voiceFile);
         }
         // empty chunk at the end
         audioChunksRef.current = [];
@@ -273,7 +276,7 @@ function VoiceManagmentProvider({ children }: ChildrenProps) {
         position: 'top-center',
       });
     }
-  }, [handleUploadVoice]);
+  }, []);
 
   const valueProps: VoiceInitialProps = {
     audioURL,
